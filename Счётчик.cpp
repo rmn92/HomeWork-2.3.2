@@ -6,11 +6,11 @@ using namespace std;
 class Counter
 {
 private:
-    int count = 1;
+    int count;
 public:
     Counter()
     {
-
+        this->count = 1;
     }
     Counter(int count)
     {
@@ -29,10 +29,6 @@ public:
     {
         cout << count << endl;
     }
-    void setCount(int value)
-    {
-        count = value;
-    }
 };
 
 int main()
@@ -41,23 +37,35 @@ int main()
     SetConsoleOutputCP(1251);
     string counterFirst;
     char command = '+';
-    int firstValueCount = 0;
+    int firstValueCount = 1;
 
     Counter count;
 
-    cout << "Вы хотите указать начальное значение счётчика? Введите да или нет: ";
-    cin >> counterFirst;
+    do
+    {
+        cout << "Вы хотите указать начальное значение счётчика? Введите да или нет: ";
+        cin >> counterFirst;
 
-    if (counterFirst == "да")
-    {
-        cout << "Введите начальное значение счётчика: ";
-        cin >> firstValueCount;
-        count.setCount(firstValueCount);
-    }
-    else if (counterFirst != "нет")
-    {
-        cout << "Данные введены неверно!" << endl;
-    }
+        if (counterFirst == "да")
+        {
+            cout << "Введите начальное значение счётчика: ";
+            cin >> firstValueCount;
+
+            Counter count2(firstValueCount);
+            count = count2;
+            
+            break;
+        }
+        else if (counterFirst == "нет")
+        {
+            break;
+        }
+        else
+        {
+            cout << "Данные введены неверно!" << endl;
+        }
+
+    } while (true);
 
     while (command != 'x')
     {
@@ -80,6 +88,9 @@ int main()
         {
             cout << "До свидания!";
         }
+        else
+        {
+            cout << "Некорректная команда!";
+        }
     }
-    
 }
